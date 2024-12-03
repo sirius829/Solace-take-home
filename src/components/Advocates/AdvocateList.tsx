@@ -10,7 +10,6 @@ import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TablePagination from "@mui/material/TablePagination";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Typography } from "@mui/material/Typography";
 
 import AdvocateItem from "./AdvocateItem";
 
@@ -70,7 +69,7 @@ const AdvocateList: FC = () => {
                             ))
                             : (
                                 <TableRow>
-                                    <TableCell colSpan={7} align="center">
+                                    <TableCell colSpan={7} height={100} align="center">
                                         No Advocate found!
                                     </TableCell>
                                 </TableRow>
