@@ -9,6 +9,7 @@ const AdvocateItem: FC<Advocate> = (advocate) => (
         <td>{advocate.city}</td>
         <td>{advocate.degree}</td>
         <td>{advocate.specialties.join(', ')}</td>
+        <td>{advocate.yearsOfExperience}</td>
         <td>{advocate.phoneNumber}</td>
     </tr>
 );

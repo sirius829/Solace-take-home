@@ -57,20 +57,7 @@ export default function Home() {
       </div>
       <br />
       <br />
-      <table>
-        <thead>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>City</th>
-          <th>Degree</th>
-          <th>Specialties</th>
-          <th>Years of Experience</th>
-          <th>Phone Number</th>
-        </thead>
-        <tbody>
-          <AdvocateList advocates={filteredAdvocates} />
-        </tbody>
-      </table>
+      <AdvocateList />
     </main>
   );
 }
