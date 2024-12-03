@@ -1,3 +1,4 @@
+"use client";
 import React, { useMemo, useState, type FC } from "react";
 
 import Paper from "@mui/material/Paper";
@@ -14,12 +15,21 @@ import AdvocateItem from "./AdvocateItem";
 import { useAdvocates } from "@/contexts/AdvocateContext";
 
 const AdvocateList: FC = () => {
-    const advocates = useAdvocates();
+    const { advocates, searchTerm } = useAdvocates();
+    const filteredAdvocates = advocates.filter((advocate) => {
+        return (
+            advocate.firstName.toLowerCase().includes(searchTerm) ||
+            advocate.lastName.toLowerCase().includes(searchTerm) ||
+            advocate.city.toLowerCase().includes(searchTerm) ||
+            advocate.degree.toLowerCase().includes(searchTerm) ||
+            advocate.specialties.some(specialty => specialty.toLowerCase().includes(searchTerm))
+        );
+    });
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const advocatesOnPage = useMemo(() => {
-        return advocates.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-    }, [page, rowsPerPage]);
+        return filteredAdvocates.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    }, [page, rowsPerPage, filteredAdvocates]);
 
     const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
         setPage(newPage);

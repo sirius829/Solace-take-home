@@ -4,10 +4,19 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { type Advocate } from "@/types/Advocate";
 import { fetchAdvocates } from "@/utils/api";
 
-const AdvocateContext = createContext<Advocate[]>([]);
+const AdvocateContext = createContext<{
+    advocates: Advocate[], 
+    searchTerm: string, 
+    setSearchTerm: (val: string) => void
+}>({
+    advocates: [],
+    searchTerm: "",
+    setSearchTerm: () => {}
+});
 
 export const AdvocateProvider = ({ children } : { children: ReactNode }) => {
     const [advocates, setAdvocates] = useState<Advocate[]>([]);
+    const [searchTerm, setSearchTerm] = useState<string>("");
 
     useEffect(() => {
         const loadAdvocates = async () => {
@@ -22,7 +31,7 @@ export const AdvocateProvider = ({ children } : { children: ReactNode }) => {
     }, []);
 
     return (
-        <AdvocateContext.Provider value={advocates}>
+        <AdvocateContext.Provider value={{advocates, searchTerm, setSearchTerm}}>
             {children}
         </AdvocateContext.Provider>
     )
