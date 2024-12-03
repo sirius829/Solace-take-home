@@ -9,13 +9,15 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import TablePagination from "@mui/material/TablePagination";
+import CircularProgress from "@mui/material/CircularProgress";
+import { Typography } from "@mui/material/Typography";
 
 import AdvocateItem from "./AdvocateItem";
 
 import { useAdvocates } from "@/contexts/AdvocateContext";
 
 const AdvocateList: FC = () => {
-    const { advocates, searchTerm } = useAdvocates();
+    const { advocates, searchTerm, isLoading } = useAdvocates();
     const filteredAdvocates = advocates.filter((advocate) => {
         return (
             advocate.firstName.toLowerCase().includes(searchTerm) ||
@@ -46,23 +48,38 @@ const AdvocateList: FC = () => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>First Name</TableCell>
-                            <TableCell>Last Name</TableCell>
-                            <TableCell>City</TableCell>
-                            <TableCell>Degree</TableCell>
-                            <TableCell>Specialties</TableCell>
-                            <TableCell>Years of Experience</TableCell>
-                            <TableCell>Phone Number</TableCell>
+                            <TableCell align="center">First Name</TableCell>
+                            <TableCell align="center">Last Name</TableCell>
+                            <TableCell align="center">City</TableCell>
+                            <TableCell align="center">Degree</TableCell>
+                            <TableCell align="center">Specialties</TableCell>
+                            <TableCell align="center">Years of Experience</TableCell>
+                            <TableCell align="center">Phone Number</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {advocatesOnPage?.map((advocate, index) => (
-                            <AdvocateItem key={index} {...advocate} />
-                        ))}
+                        {isLoading ? (
+                            <TableRow>
+                                <TableCell colSpan={7} align="center">
+                                    <CircularProgress />
+                                </TableCell>
+                            </TableRow>
+                        ) : (advocatesOnPage.length ?
+                            advocatesOnPage.map((advocate, index) => (
+                                <AdvocateItem key={index} {...advocate} />
+                            ))
+                            : (
+                                <TableRow>
+                                    <TableCell colSpan={7} align="center">
+                                        No Advocate found!
+                                    </TableCell>
+                                </TableRow>
+                            )
+                        )}
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination 
+            <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
                 count={advocates.length}

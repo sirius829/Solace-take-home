@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { useAdvocates } from "@/contexts/AdvocateContext";
 
 const SearchBox = () => {
-    const { searchTerm, setSearchTerm } = useAdvocates();
+    const { isLoading, setSearchTerm } = useAdvocates();
 
     const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value)
@@ -21,8 +21,8 @@ const SearchBox = () => {
                 label="Search"
                 placeholder="search"
                 size="small"
-                value={searchTerm}
                 onChange={onSearch}
+                disabled={isLoading}
             />
         </Box>
     );
