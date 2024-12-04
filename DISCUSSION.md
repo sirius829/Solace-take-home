@@ -28,15 +28,15 @@ In this assignment, I focused on improving the structure and functionality of th
 6. **Pagination Enhancements**:
    - Consider adding server-side pagination if the dataset grows significantly. This would reduce the amount of data sent to the client and improve load times.
 
+7. **Testing**:
+   - Write unit tests for the search functionality and the AdvocateList component to ensure reliability and maintainability of the code.
+
 ## Future Improvements
 
 1. **Error Handling**:
    - Implement error handling for the fetch operation to manage scenarios where the API call fails. This could include displaying a user-friendly message or a fallback UI.
 
-2. **Testing**:
-   - Write unit tests for the search functionality and the AdvocateList component to ensure reliability and maintainability of the code.
-
-3. **Accessibility Improvements**:
+2. **Accessibility Improvements**:
    - Review the application for accessibility best practices, ensuring that all users can effectively interact with the UI.
 
 ## Conclusion
